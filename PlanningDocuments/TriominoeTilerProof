@@ -1,11 +1,64 @@
-Step One:
+Goal: Given a 2^n x 2^n board with one piece removed, tile the rest using triominoes.
 
-Generate tiles
+Proof of Concept:
 
-Step Two:
+    Can you tile a 2^n x 2^n board with one square/piece removed with triominoes?
 
-Colour tiles
+    Proof by Induction on n
 
-Step Three:
+    Inductive Hypothesis:
+        Let F(n) be the statement that a 2^n x 2^n board with one square removed can be tiled with triominoes.
+        Assume F(n) is true.
 
-Print out coloured tiles
+    Inductive Step:
+        Assuming F(n) is true, prove that F(n) -> F(n+1).
+
+        Given F(n), that a 2^n x 2^n board with one square removed can be tiled with triominoes,
+        Want to Prove F(n+1) must be true, or that F(n) -> F(n+1)
+
+        Thus, given an algorithm that will tile a 2^n x 2^n board with one square removed using triominoes,
+        Give an algorithm that will tile a 2^(n+1) x 2^(n+1) board with one square removed.
+
+        The 2^(n+1) x 2^(n+1) board is quadruple the size of the 2^n x 2^n board.
+        Divide this 2^(n+1) x 2^(n+1) board into four quadrants.
+        Each quadrant will have size 2^n x 2^n.
+
+        The square removed from the board has to be in one of these four quadrants since the quadrants
+        form the original 2^(n+1) x 2^(n+1) board which contained the square before it was removed.
+
+        Say the square removed was taken from the upper left quadrant.
+        This quadrant is a 2^n x 2^n board and by F(n) can therefore be tiled.
+        
+        Next, add a triominoe piece such that it's center is the center of the board, and it's three
+        corners are in the upper right, bottom right, and bottom left quardants.
+
+        Each remaining quadrant is also a 2^n x 2^n board.
+        The remaining quadrants now have exactly one square/piece occupied by the newly added triominoe piece.
+        
+        Therefore, tiling each of the remaining quadrants becomes the problem of tiling a 2^n x 2^n board
+        with one piece removed using only triominoes. Which is exactly the problem that F(n) asserts is solveable.
+        Therefore, each of these remaining quadrants can also be tiled.
+        Thus, the rest of the board can be tiled.
+
+        The proof that the board can be tiled given that the square removed came from any of the other three
+        quadrants is similar to the aforementioned proof, and has been omitted for brevity.
+
+        Therefore, given that a 2^n x 2^n board with one square removed can be tiled with triominoes,
+        a 2^(n+1) x 2^(n+1) board with one square removed can be tiled with triominoes.
+
+        Q.E.D. F(n) -> F(n+1)
+
+    Base Case:
+        Prove F(1) is true.
+        Given a 2^(1) x 2^(1) board with a square removed, proof that it can be tiled using only triominoes.
+
+        There are four cases, each a rotation of the other.
+        Given a 2^(1) x 2^(1) board with the (0,0) square removed, tile it thusly:
+
+        0 A
+        A A
+
+        Where 0 represents the removed square, and A represents a space taken up by a triominoe with colour A.
+
+
+
