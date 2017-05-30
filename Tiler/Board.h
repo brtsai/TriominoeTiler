@@ -9,6 +9,7 @@
 #include <math.h>
 #include <vector>
 #include <iostream>
+#include "PrintContext.h"
 
 class Board {
 private:

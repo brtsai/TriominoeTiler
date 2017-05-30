@@ -30,14 +30,9 @@ void Board::fillBoard (char c) {
 }
 
 void Board::printBoard () {
-    auto end = board.end();
-    for (auto itor = board.begin(); itor != end; ++itor) {
-        auto iEnd = itor->end();
-        for (auto iItor = itor->begin(); iItor != iEnd; ++iItor) {
-            std::cout << *iItor << ' ';
-        }
-        std::cout << std::endl;
-    }
+    PrintContext myContext(dimension, " ");
+    auto lambda = [myContext](char* ch) mutable {myContext.printAsNext(ch);};
+    foldBoard (lambda);
 }
 
 
