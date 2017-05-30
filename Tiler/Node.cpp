@@ -4,7 +4,7 @@
 
 #include "Node.h"
 
-Node::Node() {
+Node::Node () {
     parent = NULL;
     northwest = NULL;
     northeast = NULL;
@@ -14,12 +14,18 @@ Node::Node() {
     colour = NULL;
 }
 
-Node::Node(Node* progenitor) {
+Node::Node (Node* progenitor) {
     Node();
     parent = progenitor;
 }
 
-Node::Node(Node* progenitor, Orientation toFace, char toBePainted) {
+Node::Node (Node* progenitor, Orientation toFace) {
+    Node();
+    parent = progenitor;
+    orientation = toFace;
+}
+
+Node::Node (Node* progenitor, Orientation toFace, char toBePainted) {
     Node();
     parent = progenitor;
     orientation = toFace;

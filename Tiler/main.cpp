@@ -4,6 +4,7 @@
 
 #include "Board.h"
 #include "Node.h"
+#include "AbstractTiler.h"
 
 int main(int argc, char* argv[]) {
     Board myBoard(2);

@@ -26,9 +26,10 @@ class Node {
         char colour;
 
     public:
-        Node();
-        Node(Node*);
-        Node(Node*, Orientation, char);
+        Node ();
+        Node (Node*);
+        Node (Node*, Orientation);
+        Node (Node*, Orientation, char);
 };
 
 
