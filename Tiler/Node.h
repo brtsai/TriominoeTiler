@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-enum Orientation {
+enum ORIENTATION {
     northwest,
     northeast,
     southwest,
@@ -17,19 +17,22 @@ enum Orientation {
 
 class Node {
     private:
+        size_t x;
+        size_t y;
         Node* parent;
         Node* northwest;
         Node* northeast;
         Node* southwest;
         Node* southeast;
-        Orientation orientation;
+        ORIENTATION orientation;
         char colour;
 
     public:
         Node ();
         Node (Node*);
-        Node (Node*, Orientation);
-        Node (Node*, Orientation, char);
+        Node (Node*, ORIENTATION);
+        Node (Node*, ORIENTATION, char);
+        Node (Node*, ORIENTATION, size_t, size_t);
 };
 
 

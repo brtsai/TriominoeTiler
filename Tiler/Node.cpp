@@ -19,16 +19,24 @@ Node::Node (Node* progenitor) {
     parent = progenitor;
 }
 
-Node::Node (Node* progenitor, Orientation toFace) {
+Node::Node (Node* progenitor, ORIENTATION toFace) {
     Node();
     parent = progenitor;
     orientation = toFace;
 }
 
-Node::Node (Node* progenitor, Orientation toFace, char toBePainted) {
+Node::Node (Node* progenitor, ORIENTATION toFace, char toBePainted) {
     Node();
     parent = progenitor;
     orientation = toFace;
     colour = toBePainted;
+}
+
+Node::Node (Node* progenitor, ORIENTATION toFace, size_t newX, size_t newY) {
+    Node();
+    parent = progenitor;
+    orientation = toFace;
+    x = newX;
+    y = newY;
 }
 
