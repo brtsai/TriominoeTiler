@@ -4,14 +4,25 @@
 
 #include "AbstractTiler.h"
 
-void AbstractTiler::recCreateNetwork(Node* parent, size_t nextX, size_t nextY, size_t nextPower) {
-    if(nextPower == 0) return;
+void AbstractTiler::recCreateNetwork(Node* parent, size_t nextX, size_t nextY, size_t nextDimension, ORIENTATION descent) {
+    size_t quarterDim = dimension/4;
+    size_t halfDim = dimension/2;
+    size_t threeQuarterDim = 3 * quarterDim;
+
+    Node* parentNode = (descent == none? NULL : parent);
+    Node newRoot(parentNode, descent, halfDim, halfDim);
+    root = &newRoot;
+
+    if(dimension == 1) return;
+
+    // TODO branch recursively in four directions    
 }
 
 void AbstractTiler::createNetwork() {
-    Node newRoot(NULL, ORIENTATION::none, dimension/2, dimension/2);
-    root = &newRoot;
-    
+    if(dimension == 0) return;
+
+    size_t halfDim = dimension/2;
+    recCreateNetwork(NULL, halfDim, halfDim, halfDim, none);
 }
 
 void AbstractTiler::orientNetwork() {

@@ -25,6 +25,7 @@ class Node {
         Node* southwest;
         Node* southeast;
         ORIENTATION orientation;
+        ORIENTATION descentation;
         char colour;
 
     public:
@@ -33,6 +34,10 @@ class Node {
         Node (Node*, ORIENTATION);
         Node (Node*, ORIENTATION, char);
         Node (Node*, ORIENTATION, size_t, size_t);
+        void setNorthwest(Node*);
+        void setNortheast(Node*);
+        void setSouthwest(Node*);
+        void setSoutheast(Node*);
 };
 
 

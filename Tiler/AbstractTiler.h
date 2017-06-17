@@ -16,7 +16,7 @@ class AbstractTiler {
         size_t x;
         size_t y;
 
-        void recCreateNetwork(Node*, size_t, size_t, size_t);
+        void recCreateNetwork(Node*, size_t, size_t, size_t, ORIENTATION);
         void createNetwork();
         void orientNetwork();
     public:
