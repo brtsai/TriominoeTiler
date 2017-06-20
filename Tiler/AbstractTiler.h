@@ -6,6 +6,7 @@
 #define ABSTRACTTILER_H
 
 #include "Node.h"
+#include "Board.h"
 #include <math.h>
 
 class AbstractTiler {
@@ -16,12 +17,12 @@ class AbstractTiler {
         size_t x;
         size_t y;
 
-        void recCreateNetwork(Node*, size_t, size_t, size_t, ORIENTATION);
+        Node* recCreateNetwork(Node*, size_t, size_t, size_t, ORIENTATION);
         void createNetwork();
         void orientNetwork();
     public:
         AbstractTiler(size_t, size_t, size_t);
-
+        void printAbstract();
 
 };
 

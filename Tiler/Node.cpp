@@ -40,3 +40,18 @@ Node::Node (Node* progenitor, ORIENTATION descentar, size_t newX, size_t newY) {
     y = newY;
 }
 
+void Node::setNorthwest (Node* node) {
+    northwest = node;
+}
+
+void Node::setNortheast (Node* node) {
+    northeast = node;
+}
+
+void Node::setSouthwest (Node* node) {
+    southwest = node;
+}
+
+void Node::setSoutheast (Node* node) {
+    southeast = node;
+}

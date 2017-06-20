@@ -5,7 +5,7 @@ bin := tiler
 
 CXX := $(shell which clang++ || which g++)
 CXXFLAGS := -Wall -W -std=c++11
-LDFLAGS := -lcurl
+LDFLAGS := 
 
 UNAME := $(shell uname)
 ifeq ($(UNAME),Linux)
