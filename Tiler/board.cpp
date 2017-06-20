@@ -35,4 +35,8 @@ void Board::printBoard () {
     foldBoard (lambda);
 }
 
+void Board::insert (char c, size_t x, size_t y) {
+    assert (x < dimension);
+    assert (y < dimension);
+}
 

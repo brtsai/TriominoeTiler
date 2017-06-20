@@ -5,18 +5,20 @@
 #include "AbstractTiler.h"
 
 Node* AbstractTiler::recCreateNetwork(Node* parent, size_t nextX, size_t nextY, size_t nextDimension, ORIENTATION descent) {
-    if(dimension == 0) return NULL;
+    if(nextDimension == 0) return NULL;
 
-    size_t quarterDim = dimension/4;
-    size_t halfDim = dimension/2;
-    size_t threeQuarterDim = 3 * quarterDim;
+    size_t halfDim = nextDimension/2;
+    size_t north = nextY - halfDim;
+    size_t east = nextX + halfDim;
+    size_t south = nextY + halfDim;
+    size_t west = nextX - halfDim;
     Node* parentNode = (descent == none? NULL : parent);
-    Node* newNode = new Node(parentNode, descent, halfDim, halfDim);
+    Node* newNode = new Node(parentNode, descent, nextX, nextY);
     
-    newNode -> setNorthwest(recCreateNetwork (newNode, nextX - halfDim, nextY - halfDim, halfDim, northwest));
-    newNode -> setNortheast(recCreateNetwork (newNode, nextX + halfDim, nextY - halfDim, halfDim, northeast));
-    newNode -> setSouthwest(recCreateNetwork (newNode, nextX - halfDim, nextY + halfDim, halfDim, southwest));
-    newNode -> setSoutheast(recCreateNetwork (newNode, nextX + halfDim, nextY + halfDim, halfDim, southeast));
+    newNode -> setNorthwest(recCreateNetwork (newNode, west, north, halfDim, northwest));
+    newNode -> setNortheast(recCreateNetwork (newNode, east, north, halfDim, northeast));
+    newNode -> setSouthwest(recCreateNetwork (newNode, west, south, halfDim, southwest));
+    newNode -> setSoutheast(recCreateNetwork (newNode, east, south, halfDim, southeast));
     
     return newNode;
 }

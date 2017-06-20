@@ -9,6 +9,7 @@
 #include <math.h>
 #include <vector>
 #include <iostream>
+#include <assert.h>
 #include "PrintContext.h"
 
 class Board {
@@ -24,7 +25,7 @@ public:
 
     void fillBoard(char);
     void printBoard();
-
+    void insert(char, size_t, size_t);
 };
 
 
