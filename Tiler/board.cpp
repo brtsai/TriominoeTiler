@@ -38,5 +38,8 @@ void Board::printBoard () {
 void Board::insert (char c, size_t x, size_t y) {
     assert (x < dimension);
     assert (y < dimension);
+    
+    auto row = board.at(y);
+    row.emplace(row.begin() + x, c);
 }
 

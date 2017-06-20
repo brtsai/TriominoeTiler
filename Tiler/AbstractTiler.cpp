@@ -8,10 +8,10 @@ Node* AbstractTiler::recCreateNetwork(Node* parent, size_t nextX, size_t nextY, 
     if(nextDimension == 0) return NULL;
 
     size_t halfDim = nextDimension/2;
-    size_t north = nextY - halfDim;
-    size_t east = nextX + halfDim;
-    size_t south = nextY + halfDim;
-    size_t west = nextX - halfDim;
+    size_t north = halfDim/2;
+    size_t east = halfDim + north;
+    size_t south = east;
+    size_t west = north;
     Node* parentNode = (descent == none? NULL : parent);
     Node* newNode = new Node(parentNode, descent, nextX, nextY);
     
@@ -25,7 +25,7 @@ Node* AbstractTiler::recCreateNetwork(Node* parent, size_t nextX, size_t nextY, 
 
 void AbstractTiler::createNetwork() {
     size_t halfDim = dimension/2;
-    root = recCreateNetwork(NULL, halfDim, halfDim, halfDim, none);
+    root = recCreateNetwork(NULL, halfDim, halfDim, dimension, none);
 }
 
 void AbstractTiler::orientNetwork() {
