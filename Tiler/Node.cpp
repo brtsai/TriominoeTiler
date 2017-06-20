@@ -44,14 +44,42 @@ void Node::setNorthwest (Node* node) {
     northwest = node;
 }
 
+Node* Node::getNorthwest () {
+    return northwest;
+}
+
 void Node::setNortheast (Node* node) {
     northeast = node;
+}
+
+Node* Node::getNortheast () {
+    return northeast;
 }
 
 void Node::setSouthwest (Node* node) {
     southwest = node;
 }
 
+Node* Node::getSouthwest () {
+    return southwest;
+}
+
+
 void Node::setSoutheast (Node* node) {
     southeast = node;
 }
+
+Node* Node::getSoutheast () {
+    return southeast;
+}
+
+size_t Node::getX() {
+    return x;
+}
+
+size_t Node::getY() {
+    return y;
+}
+
+
+

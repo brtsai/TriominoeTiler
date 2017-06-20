@@ -41,10 +41,17 @@ AbstractTiler::AbstractTiler (size_t newPower, size_t xOfRemoved, size_t yOfRemo
     orientNetwork();
 }
 
-
+void recAddToBoard(Node* curr, Board* board) {
+    if (curr == NULL) return;
+    board -> insert('X', curr -> getX(), curr -> getY());
+    recAddToBoard(curr -> getNorthwest(), board);
+    recAddToBoard(curr -> getNortheast(), board);
+    recAddToBoard(curr -> getSouthwest(), board);
+    recAddToBoard(curr -> getSoutheast(), board);
+}
 
 void AbstractTiler::printAbstract() {
     Board* board = new Board(power);
-
-
+    recAddToBoard(root, board);
+    board->printBoard();
 }

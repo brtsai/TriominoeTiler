@@ -35,9 +35,15 @@ class Node {
         Node (Node*, ORIENTATION, char);
         Node (Node*, ORIENTATION, size_t, size_t);
         void setNorthwest(Node*);
+        Node* getNorthwest();
         void setNortheast(Node*);
+        Node* getNortheast();
         void setSouthwest(Node*);
+        Node* getSouthwest();
         void setSoutheast(Node*);
+        Node* getSoutheast();
+        size_t getX();
+        size_t getY();
 };
 
 
