@@ -21,7 +21,7 @@ class AbstractTiler {
         void createNetwork();
         void orientNetwork();
     public:
-        AbstractTiler(size_t, size_t, size_t);
+        AbstractTiler(size_t power, size_t x, size_t y);
         void printAbstract();
 
 };

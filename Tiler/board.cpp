@@ -12,6 +12,8 @@ Board::Board (size_t n) {
     for (auto itor = board.begin(); itor != end; ++itor) {
         *itor = std::vector<char> (dimension);
     }
+
+    fillBoard(' ');
 }
 
 void Board::foldBoard (std::function<void(char*)> fn) {
@@ -38,8 +40,8 @@ void Board::printBoard () {
 void Board::insert (char c, size_t x, size_t y) {
     assert (x < dimension);
     assert (y < dimension);
-    
-    auto row = board.at(y);
-    row.emplace(row.begin() + x, c);
+    auto row = board.begin() + y;
+    auto toOverride = row->begin() + x;
+    *toOverride = c;
 }
 

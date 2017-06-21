@@ -44,29 +44,28 @@ void Node::setNorthwest (Node* node) {
     northwest = node;
 }
 
-Node* Node::getNorthwest () {
-    return northwest;
-}
-
 void Node::setNortheast (Node* node) {
     northeast = node;
-}
-
-Node* Node::getNortheast () {
-    return northeast;
 }
 
 void Node::setSouthwest (Node* node) {
     southwest = node;
 }
 
-Node* Node::getSouthwest () {
-    return southwest;
-}
-
-
 void Node::setSoutheast (Node* node) {
     southeast = node;
+}
+
+Node* Node::getNorthwest () {
+    return northwest;
+}
+
+Node* Node::getNortheast () {
+    return northeast;
+}
+
+Node* Node::getSouthwest () {
+    return southwest;
 }
 
 Node* Node::getSoutheast () {
@@ -81,5 +80,15 @@ size_t Node::getY() {
     return y;
 }
 
+ORIENTATION Node::getOrientation() {
+    return orientation;
+}
 
+char Node::getOrientationAsChar() {
+    if (orientation == ORIENTATION::northwest) return '1';
+    if (orientation == ORIENTATION::northeast) return '2';
+    if (orientation == ORIENTATION::southwest) return '3';
+    if (orientation == ORIENTATION::southeast) return '4';
+    return '0';
+}
 
