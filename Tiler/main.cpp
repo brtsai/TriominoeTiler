@@ -22,8 +22,13 @@ int main(int argc, char* argv[]) {
 
     std::cout << "Making a 4x4 abstract tiler with 0,0 and printing." << std::endl;
 
-    AbstractTiler myTiler(5,0,0);
+    AbstractTiler myTiler(2,0,0);
     myTiler.printAbstract();
+
+    std::cout << "Making a 32x32 abstract tiler with 0,0 and printing." << std::endl;
+
+    AbstractTiler myTiler2(5,0,0);
+    myTiler2.printAbstract();
 
     return 0;
 }

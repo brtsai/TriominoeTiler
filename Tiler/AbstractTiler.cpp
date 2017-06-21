@@ -26,7 +26,7 @@ Node* AbstractTiler::recCreateNetwork(Node* parent, size_t nextX, size_t nextY, 
 void AbstractTiler::createNetwork() {
     size_t halfDim = dimension/2;
     size_t quarterDim = halfDim/2;
-    root = recCreateNetwork(NULL, quarterDim, quarterDim, halfDim, none);
+    root = recCreateNetwork(NULL, halfDim, halfDim, halfDim, none);
 }
 
 void AbstractTiler::orientNetwork() {
