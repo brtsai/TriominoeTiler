@@ -92,3 +92,8 @@ char Node::getOrientationAsChar() {
     return '0';
 }
 
+bool Node::isLeaf() {
+    return northwest == NULL;    
+}
+
+

@@ -46,6 +46,7 @@ class Node {
         size_t getY();
         ORIENTATION getOrientation();
         char getOrientationAsChar();
+        bool isLeaf();
 };
 
 

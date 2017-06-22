@@ -30,5 +30,16 @@ int main(int argc, char* argv[]) {
     AbstractTiler myTiler2(5,0,0);
     myTiler2.printAbstract();
 
+    std::cout << "Making a 8x8 abstract tiler with 7,3 and printing." << std::endl;
+
+    AbstractTiler myTiler3(3,7,3);
+    myTiler3.printAbstract();
+
+    std::cout << "Making a 8x8 abstract tiler with 7,2 and printing." << std::endl;
+    // TODO currently fails this test
+    AbstractTiler myTiler4(3,7,2);
+    myTiler4.printAbstract();
+
+
     return 0;
 }

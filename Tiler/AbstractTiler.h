@@ -12,6 +12,7 @@
 class AbstractTiler {
     private:
         Node* root;
+        Node* presidingNode;
         size_t power;
         size_t dimension;
         size_t x;
@@ -20,6 +21,7 @@ class AbstractTiler {
         Node* recCreateNetwork(Node*, size_t, size_t, size_t, ORIENTATION);
         void createNetwork();
         void orientNetwork();
+        void printPresidingNodeCoords();
     public:
         AbstractTiler(size_t power, size_t x, size_t y);
         void printAbstract();
