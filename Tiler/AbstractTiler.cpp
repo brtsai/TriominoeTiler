@@ -41,7 +41,7 @@ isUnderCurr (size_t nX, size_t nY, size_t x, size_t y) {
 
     size_t diffX = abs_diff (x, nX);
     size_t diffY = abs_diff (y, nY);
-    if (diffX < 2 && diffY < 2)
+    if (diffX < 2 && diffY < 2) return true;
     return false;
 }
 
@@ -54,9 +54,13 @@ findPresidingNode (Node* curr, size_t x, size_t y, size_t magnitude) {
 
     if (isUnderCurr(nX, nY, x, y)) return curr;
 
+    std::cout << x << " > " << nX << " " << (x>nX)
+              << " and " << y << " >= " << nY << " " << (y>=nY)
+              << std::endl;
+
     Node* next = (x > nX) ? 
-                ((y > nY) ? curr -> getSoutheast() : curr -> getNortheast()) : 
-                ((y > nY) ? curr -> getSouthwest() : curr -> getNorthwest());
+                ((y >= nY) ? curr -> getSoutheast() : curr -> getNortheast()) : 
+                ((y >= nY) ? curr -> getSouthwest() : curr -> getNorthwest());
     return findPresidingNode (next, x, y, magnitude - 1);
 }
 
