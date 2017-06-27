@@ -54,29 +54,49 @@ findPresidingNode (Node* curr, size_t x, size_t y, size_t magnitude) {
 
     if (isUnderCurr(nX, nY, x, y)) return curr;
 
+    /**
     std::cout << x << " > " << nX << " " << (x>nX)
               << " and " << y << " >= " << nY << " " << (y>=nY)
               << std::endl;
+    */
 
     Node* next = (x > nX) ? 
                 ((y >= nY) ? curr -> getSoutheast() : curr -> getNortheast()) : 
-                ((y >= nY) ? curr -> getSouthwest() : curr -> getNorthwest());
+                ((y >= nY) ? curr -> getSouthwest() : curr -> getNorthwest()) ;
     return findPresidingNode (next, x, y, magnitude - 1);
 }
 
 void 
-recWipeOrientation(Node* curr) {
+recWipeOrientation (Node* curr) {
+    if (curr == NULL) return;
+    curr -> setOrientation (none);
+    recWipeOrientation (curr -> getNorthwest());
+    recWipeOrientation (curr -> getNortheast());
+    recWipeOrientation (curr -> getSouthwest());
+    recWipeOrientation (curr -> getSoutheast());
+}
 
+void
+recOrientFrom (ORIENTATION toRome, Node* curr) {
+    if (curr == NULL) return;
+    if (curr -> getOrientation() != none) return;
+    curr -> setOrientation (toRome);
+    recOrientFrom (curr -> getDescentation(), curr -> getParent());
+    recOrientFrom (southeast, curr -> getNorthwest());
+    recOrientFrom (southwest, curr -> getNortheast());
+    recOrientFrom (northeast, curr -> getSouthwest());
+    recOrientFrom (northwest, curr -> getSoutheast());
 }
 
 void 
 AbstractTiler::orientNetwork () {
-    //TODO
     assert(x < dimension);
     assert(y < dimension);
     assert(power != 0);
     presidingNode = findPresidingNode(root, x, y, power);
     printPresidingNodeCoords();
+    recWipeOrientation(root);
+    recOrientFrom (presidingNode -> getOrientationTo (x, y), presidingNode);    
 }
 
 void 

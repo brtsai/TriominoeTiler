@@ -6,6 +6,7 @@
 #define NODE_H
 
 #include <stdio.h>
+#include <unordered_map>
 
 enum ORIENTATION {
     northwest,
@@ -14,6 +15,8 @@ enum ORIENTATION {
     southeast,
     none,
 };
+
+ORIENTATION negateOrientation (ORIENTATION);
 
 class Node {
     private:
@@ -31,9 +34,9 @@ class Node {
     public:
         Node ();
         Node (Node*);
-        Node (Node*, ORIENTATION);
-        Node (Node*, ORIENTATION, char);
-        Node (Node*, ORIENTATION, size_t, size_t);
+        Node (Node*, ORIENTATION descentar);
+        Node (Node*, ORIENTATION descentar, char);
+        Node (Node*, ORIENTATION descentar, size_t, size_t);
         void setNorthwest(Node*);
         void setNortheast(Node*);
         void setSouthwest(Node*);
@@ -42,13 +45,15 @@ class Node {
         Node* getNortheast();
         Node* getSouthwest();
         Node* getSoutheast();
+        Node* getParent();
         size_t getX();
         size_t getY();
         ORIENTATION getOrientation();
         char getOrientationAsChar();
+        void setOrientation(ORIENTATION);
+        ORIENTATION getDescentation();
         bool isLeaf();
+        ORIENTATION getOrientationTo (size_t, size_t);
 };
-
-
 
 #endif

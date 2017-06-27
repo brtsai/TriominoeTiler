@@ -4,7 +4,7 @@ hdr := $(wildcard *.h)
 bin := tiler
 
 CXX := $(shell which clang++ || which g++)
-CXXFLAGS := -Wall -W -std=c++11
+CXXFLAGS := -Wall -W -std=c++14
 LDFLAGS := 
 
 UNAME := $(shell uname)
