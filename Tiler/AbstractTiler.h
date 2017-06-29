@@ -8,6 +8,7 @@
 #include "Node.h"
 #include "Board.h"
 #include <math.h>
+#include <assert.h>
 
 class AbstractTiler {
     private:
@@ -20,7 +21,7 @@ class AbstractTiler {
 
         Node* recCreateNetwork(Node*, size_t, size_t, size_t, ORIENTATION);
         void createNetwork();
-        void orientNetwork();
+        void solveNetwork();
         void printPresidingNodeCoords();
     public:
         AbstractTiler(size_t power, size_t x, size_t y);

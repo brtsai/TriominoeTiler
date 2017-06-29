@@ -49,12 +49,14 @@ Node::Node (Node* progenitor, ORIENTATION descentar, char toBePainted) {
     colour = toBePainted;
 }
 
-Node::Node (Node* progenitor, ORIENTATION descentar, size_t newX, size_t newY) {
+Node::Node (Node* progenitor, ORIENTATION descentar, size_t newX, size_t newY, size_t newRadius) {
     Node();
     parent = progenitor;
+    descentation = descentar;
     orientation = descentar;
     x = newX;
     y = newY;
+    radius = newRadius;
 }
 
 void 
@@ -112,6 +114,11 @@ Node::getY () {
     return y;
 }
 
+size_t
+Node::getRadius () {
+    return radius;
+}
+
 ORIENTATION 
 Node::getOrientation () {
     return orientation;
@@ -146,4 +153,9 @@ Node::getOrientationTo (size_t oX, size_t oY) {
     return (oX >= x) ?
           ((oY >= y) ? (ORIENTATION::southeast) : (ORIENTATION::northeast)) :
           ((oY >= y) ? (ORIENTATION::southwest) : (ORIENTATION::northwest)) ;
+}
+
+void
+Node::orientTo (size_t oX, size_t oY) {
+    orientation = getOrientationTo(oX, oY);
 }

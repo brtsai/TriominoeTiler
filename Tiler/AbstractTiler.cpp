@@ -5,29 +5,29 @@
 #include "AbstractTiler.h"
 
 Node* 
-AbstractTiler::recCreateNetwork(Node* parent, size_t nextX, size_t nextY, size_t nextDimension, ORIENTATION descent) {
-    if(nextDimension == 0) return NULL;
+AbstractTiler::recCreateNetwork(Node* parent, size_t nextX, size_t nextY, size_t nextRadius, ORIENTATION descent) {
+    if(nextRadius == 0) return NULL;
 
-    size_t halfDim = nextDimension/2;
-    size_t north = nextY - halfDim;
-    size_t east = nextX + halfDim;
-    size_t south = nextY + halfDim;
-    size_t west = nextX - halfDim;
+    size_t halfRad = nextRadius/2;
+    size_t north = nextY - halfRad;
+    size_t east = nextX + halfRad;
+    size_t south = nextY + halfRad;
+    size_t west = nextX - halfRad;
     Node* parentNode = (descent == none? NULL : parent);
-    Node* newNode = new Node(parentNode, descent, nextX, nextY);
+    Node* newNode = new Node(parentNode, descent, nextX, nextY, nextRadius);
     
-    newNode -> setNorthwest(recCreateNetwork (newNode, west, north, halfDim, northwest));
-    newNode -> setNortheast(recCreateNetwork (newNode, east, north, halfDim, northeast));
-    newNode -> setSouthwest(recCreateNetwork (newNode, west, south, halfDim, southwest));
-    newNode -> setSoutheast(recCreateNetwork (newNode, east, south, halfDim, southeast));
+    newNode -> setNorthwest(recCreateNetwork (newNode, west, north, halfRad, northwest));
+    newNode -> setNortheast(recCreateNetwork (newNode, east, north, halfRad, northeast));
+    newNode -> setSouthwest(recCreateNetwork (newNode, west, south, halfRad, southwest));
+    newNode -> setSoutheast(recCreateNetwork (newNode, east, south, halfRad, southeast));
     
     return newNode;
 }
 
 void 
 AbstractTiler::createNetwork() {
-    size_t halfDim = dimension/2;
-    root = recCreateNetwork(NULL, halfDim, halfDim, halfDim, none);
+    size_t radius = dimension/2;
+    root = recCreateNetwork(NULL, radius, radius, radius, none);
 }
 
 size_t 
@@ -76,27 +76,42 @@ recWipeOrientation (Node* curr) {
     recWipeOrientation (curr -> getSoutheast());
 }
 
-void
-recOrientFrom (ORIENTATION toRome, Node* curr) {
+void recSolveFor (Node* curr, size_t x, size_t y) {
     if (curr == NULL) return;
-    if (curr -> getOrientation() != none) return;
-    curr -> setOrientation (toRome);
-    recOrientFrom (curr -> getDescentation(), curr -> getParent());
-    recOrientFrom (southeast, curr -> getNorthwest());
-    recOrientFrom (southwest, curr -> getNortheast());
-    recOrientFrom (northeast, curr -> getSouthwest());
-    recOrientFrom (northwest, curr -> getSoutheast());
+
+    size_t cX = curr -> getX();
+    size_t cY = curr -> getY();
+    size_t r = curr -> getRadius();
+    size_t west = cX - 1;
+    size_t east = cX;
+    size_t north = cY - 1;
+    size_t south = cY;
+    if (curr -> isLeaf()) curr -> orientTo(x,y);
+    assert (x >= cX - r && x < cX + r);
+    assert (y >= cY - r && y < cY + r);
+    curr -> orientTo(x,y);
+    ORIENTATION quadrantTo = curr -> getOrientationTo(x,y);
+   
+    if (quadrantTo == none) throw "quadrantTo == none";
+    (quadrantTo != northwest) ? (recSolveFor (curr -> getNorthwest(), west, north)) :
+                                (recSolveFor (curr -> getNorthwest(), x, y));
+    (quadrantTo != northeast) ? (recSolveFor (curr -> getNortheast(), east, north)) :
+                                (recSolveFor (curr -> getNortheast(), x, y));
+    (quadrantTo != southwest) ? (recSolveFor (curr -> getSouthwest(), west, south)) :
+                                (recSolveFor (curr -> getSouthwest(), x, y));
+    (quadrantTo != southeast) ? (recSolveFor (curr -> getSoutheast(), east, south)) :
+                                (recSolveFor (curr -> getSoutheast(), x, y));
+
 }
 
 void 
-AbstractTiler::orientNetwork () {
+AbstractTiler::solveNetwork () {
     assert(x < dimension);
     assert(y < dimension);
     assert(power != 0);
     presidingNode = findPresidingNode(root, x, y, power);
     printPresidingNodeCoords();
-    recWipeOrientation(root);
-    recOrientFrom (presidingNode -> getOrientationTo (x, y), presidingNode);    
+    recSolveFor(root, x, y);
 }
 
 void 
@@ -111,7 +126,7 @@ AbstractTiler::AbstractTiler (size_t newPower, size_t xOfRemoved, size_t yOfRemo
     x = xOfRemoved;
     y = yOfRemoved;
     createNetwork();
-    orientNetwork();
+    solveNetwork();
 }
 
 void 

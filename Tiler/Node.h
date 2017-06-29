@@ -22,6 +22,7 @@ class Node {
     private:
         size_t x;
         size_t y;
+        size_t radius;
         Node* parent;
         Node* northwest;
         Node* northeast;
@@ -36,7 +37,7 @@ class Node {
         Node (Node*);
         Node (Node*, ORIENTATION descentar);
         Node (Node*, ORIENTATION descentar, char);
-        Node (Node*, ORIENTATION descentar, size_t, size_t);
+        Node (Node*, ORIENTATION descentar, size_t, size_t, size_t);
         void setNorthwest(Node*);
         void setNortheast(Node*);
         void setSouthwest(Node*);
@@ -48,12 +49,14 @@ class Node {
         Node* getParent();
         size_t getX();
         size_t getY();
+        size_t getRadius();
         ORIENTATION getOrientation();
         char getOrientationAsChar();
         void setOrientation(ORIENTATION);
         ORIENTATION getDescentation();
         bool isLeaf();
         ORIENTATION getOrientationTo (size_t, size_t);
+        void orientTo (size_t, size_t);
 };
 
 #endif
