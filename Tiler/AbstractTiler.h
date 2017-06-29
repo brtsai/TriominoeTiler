@@ -26,7 +26,8 @@ class AbstractTiler {
     public:
         AbstractTiler(size_t power, size_t x, size_t y);
         void printAbstract();
-
+        Board* makeTiledBoard();
+        Board* makeAndPrintTiledBoard();
 };
 
 #endif

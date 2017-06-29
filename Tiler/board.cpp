@@ -45,3 +45,7 @@ void Board::insert (char c, size_t x, size_t y) {
     *toOverride = c;
 }
 
+size_t
+Board::getDimension() {
+    return dimension;
+}

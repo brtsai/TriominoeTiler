@@ -144,4 +144,73 @@ AbstractTiler::printAbstract () {
     Board* board = new Board(power);
     recAddToBoard(root, board);
     board->printBoard();
+    free(board);
 }
+
+void insertTile(Node* curr, Board* board) {
+    if (curr == NULL || board == NULL) return;
+    size_t cX = curr -> getX();
+    size_t cY = curr -> getY();
+    ORIENTATION o = curr -> getOrientation();
+    assert(cX > 0);
+    assert(cY > 0);
+    assert(o != none);
+    size_t bD = board -> getDimension();
+    assert(cX <= bD);
+    assert(cY <= bD);
+    char c;
+    size_t north = cY - 1;
+    size_t south = cY;
+    size_t east = cX;
+    size_t west = cX - 1;
+
+    if (curr -> isLeaf()) {
+        switch (o) {
+            case northwest:
+            case southeast:
+                c = 'B';
+                break;
+            case northeast:
+            case southwest:
+                c = 'C';
+                break;
+            case none:
+            default:
+                c = 'X';
+                break;
+        }
+    } else {
+        c = 'A';
+        if (o == none) c = 'Y';
+    }
+    
+    if (o != northwest) board -> insert(c, west, north);
+    if (o != northeast) board -> insert(c, east, north);
+    if (o != southwest) board -> insert(c, west, south);
+    if (o != southeast) board -> insert(c, east, south);
+}
+
+void
+recAddTileToBoard(Node* curr, Board* board) {
+    if (curr == NULL) return;
+    insertTile(curr, board);
+    recAddTileToBoard(curr -> getNorthwest(), board);
+    recAddTileToBoard(curr -> getNortheast(), board);
+    recAddTileToBoard(curr -> getSouthwest(), board);
+    recAddTileToBoard(curr -> getSoutheast(), board);
+}
+
+Board*
+AbstractTiler::makeTiledBoard () {
+    Board* toReturn = new Board(power);
+    recAddTileToBoard(root, toReturn);
+    return toReturn;
+}
+
+Board*
+AbstractTiler::makeAndPrintTiledBoard () {
+    Board* toReturn = makeTiledBoard();
+    toReturn -> printBoard();
+    return toReturn;
+}
+

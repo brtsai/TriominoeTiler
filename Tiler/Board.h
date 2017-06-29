@@ -26,6 +26,7 @@ public:
     void fillBoard(char);
     void printBoard();
     void insert(char, size_t, size_t);
+    size_t getDimension();
 };
 
 
