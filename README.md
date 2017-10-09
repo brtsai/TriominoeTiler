@@ -2,8 +2,8 @@
 
 Given a 2^n x 2^n board with coordinates starting from (0,0)
 Define Triominoes as pieces made from 3 squares that have the following configurations:
-Configuration 1:
-A A
+Configuration 1: <br />
+A A <br />
 A
 
 Configuration 2:
